@@ -1,0 +1,176 @@
+﻿<Window
+    x:Class="TwitchDesktop.WPF.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:TwitchDesktop.WPF"
+    xmlns:ViewModel="clr-namespace:TwitchDesktop.ViewModel.ViewModels;assembly=TwitchDesktop.ViewModel"
+    xmlns:Converters="clr-namespace:TwitchDesktop.WPF.Converters"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Width="960" Height="540"
+    Background="Transparent"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Window.DataContext>
+        <ViewModel:MainViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel
+        Orientation="Vertical">
+        <Grid
+            x:Name="vwTopBar"
+            Width="960" Height="30"
+            Background="#4B367C"
+            MouseDown="TopBar_MouseDown">
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+                <Button
+                    x:Name="btnMinimize"
+                    Width="30" Height="30"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource CustomButtonStyle}"
+                    MouseEnter="Button_MouseEnter"
+                    MouseLeave="Button_MouseLeave"
+                    Command="{Binding Path=MinimizeCommand}">
+                    <StackPanel
+                        Width="30" Height="30">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_minimize_white.png" Stretch="UniformToFill"/>
+                        </StackPanel.Background>
+                    </StackPanel>
+                </Button>
+                <Button
+                    x:Name="btnClose"
+                    Width="30" Height="30"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource CustomButtonStyle}"
+                    MouseEnter="Button_MouseEnter"
+                    MouseLeave="Button_MouseLeave"
+                    Command="{Binding Path=CloseCommand}">
+                    <StackPanel
+                        Width="30" Height="30">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_close_white.png" Stretch="UniformToFill"/>
+                        </StackPanel.Background>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid
+            x:Name="vwHeader"
+            Width="960" Height="110"
+            Background="#4B367C">
+            <Grid
+                Margin="30 0 30 30"
+                HorizontalAlignment="Left">
+                <Image Source="/TwitchDesktop.WPF;component/Resources/Images/twitch_combo_white.png"/>
+            </Grid>
+            <StackPanel
+                Width="Auto" Height="36"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom">
+                <!-- INICIO LISTA -->
+                <Button
+                    x:Name="btnHome"
+                    Width="Auto" Height="36"
+                    Background="#4B367C"
+                    Style="{StaticResource CustomButtonStyle}"
+                    MouseEnter="Button_MouseEnter"
+                    MouseLeave="Button_MouseLeave"
+                    Command="{Binding Path=HomeCommand}">
+                    <Grid>
+                        <TextBlock
+                            Margin="16 0"
+                            Foreground="Azure"
+                            FontSize="14"
+                            Text="HOME"/>
+                        <Canvas
+                            Height="1"
+                            Margin="8 21 8 0"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            Background="Azure"
+                            Visibility="{Binding Path=HomeSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Button>
+                <Button
+                    x:Name="btnFollowing"
+                    Width="Auto" Height="36"
+                    Background="#4B367C"
+                    Style="{StaticResource CustomButtonStyle}"
+                    MouseEnter="Button_MouseEnter"
+                    MouseLeave="Button_MouseLeave"
+                    Command="{Binding Path=FollowingCommand}">
+                    <Grid>
+                        <TextBlock
+                            Margin="16 0"
+                            Foreground="Azure"
+                            FontSize="14"
+                            Text="FOLLOWING"/>
+                        <Canvas
+                            Height="1"
+                            Margin="8 21 8 0"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            Background="Azure"
+                            Visibility="{Binding Path=FollowingSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Button>
+                <Button
+                    x:Name="btnSettings"
+                    Width="Auto" Height="36"
+                    Background="#4B367C"
+                    Style="{StaticResource CustomButtonStyle}"
+                    MouseEnter="Button_MouseEnter"
+                    MouseLeave="Button_MouseLeave"
+                    Command="{Binding Path=SettingsCommand}">
+                    <Grid>
+                        <TextBlock
+                            Margin="16 0"
+                            Foreground="Azure"
+                            FontSize="14"
+                            Text="SETTINGS"/>
+                        <Canvas
+                            Height="1"
+                            Margin="8 21 8 0"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            Background="Azure"
+                            Visibility="{Binding Path=SettingsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Button>
+                <!-- FIN LISTA -->
+            </StackPanel>
+        </Grid>
+        <Grid
+            x:Name="vwMainContent"
+            Width="960" Height="400"
+            Background="#2C2541">
+        </Grid>
+    </StackPanel>
+</Window>

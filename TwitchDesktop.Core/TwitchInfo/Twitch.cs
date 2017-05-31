@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchDesktop.Common.Enumerables
+namespace TwitchDesktop.Core.TwitchInfo
 {
-    public enum OptionButton
+    public enum Twitch
     {
-        Home,
-        Following,
-        Settings,
-        Auth
+        TwitchData
     }
 }

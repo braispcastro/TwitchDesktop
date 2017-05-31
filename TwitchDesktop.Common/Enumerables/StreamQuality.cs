@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace TwitchDesktop.Common.Enumerables
 {
-    public enum OptionButton
+    public enum StreamQuality
     {
-        Home,
-        Following,
-        Settings,
-        Auth
+        Source,
+        High,
+        Medium,
+        Low,
+        Mobile,
+        Best,
+        Worst
     }
 }

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchDesktop.Common.Enumerables
+namespace TwitchDesktop.ViewModel.ViewModels
 {
-    public enum OptionButton
+    public class HomeViewModel
     {
-        Home,
-        Following,
-        Settings,
-        Auth
+
     }
 }

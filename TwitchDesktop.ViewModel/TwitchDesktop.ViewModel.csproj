@@ -56,8 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AuthViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\FollowingViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -70,6 +74,10 @@
     <ProjectReference Include="..\TwitchDesktop.Core\TwitchDesktop.Core.csproj">
       <Project>{a0e37c11-c328-46ec-85f5-f63f93e7e4fa}</Project>
       <Name>TwitchDesktop.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitchDesktop.Model\TwitchDesktop.Model.csproj">
+      <Project>{ef232cd9-1890-4b03-b039-95f0096a9ac1}</Project>
+      <Name>TwitchDesktop.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

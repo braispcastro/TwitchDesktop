@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="TwitchDesktop.WPF.MainWindow"
+    x:Class="TwitchDesktop.WPF.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,12 +8,13 @@
     xmlns:ViewModel="clr-namespace:TwitchDesktop.ViewModel.ViewModels;assembly=TwitchDesktop.ViewModel"
     xmlns:Converters="clr-namespace:TwitchDesktop.WPF.Converters"
     mc:Ignorable="d"
-    Title="MainWindow"
-    Width="960" Height="540"
+    Title="MainView"
+    Width="960" Height="720"
     Background="Transparent"
     WindowStyle="None"
     ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    WindowStartupLocation="CenterScreen"
+    Loaded="Window_Loaded">
     <Window.DataContext>
         <ViewModel:MainViewModel />
     </Window.DataContext>
@@ -57,9 +58,12 @@
                     MouseLeave="Button_MouseLeave"
                     Command="{Binding Path=MinimizeCommand}">
                     <StackPanel
-                        Width="30" Height="30">
+                        Width="30" Height="15"
+                        Margin="0 12 0 0">
                         <StackPanel.Background>
-                            <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_minimize_white.png" Stretch="UniformToFill"/>
+                            <ImageBrush
+                                ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_minimize_white.png"
+                                Stretch="UniformToFill" />
                         </StackPanel.Background>
                     </StackPanel>
                 </Button>
@@ -169,8 +173,12 @@
         </Grid>
         <Grid
             x:Name="vwMainContent"
-            Width="960" Height="400"
+            Width="960" Height="580"
             Background="#2C2541">
+            <Frame
+                x:Name="FrameContent"
+                Background="Transparent"
+                NavigationUIVisibility="Hidden"/>
         </Grid>
     </StackPanel>
 </Window>

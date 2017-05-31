@@ -14,13 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TwitchDesktop.Common.Enumerables;
 using TwitchDesktop.ViewModel.ViewModels;
+using TwitchDesktop.WPF.Views;
 
 namespace TwitchDesktop.WPF
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para MainView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
         private MainViewModel MainViewModel
         {
@@ -28,9 +29,10 @@ namespace TwitchDesktop.WPF
         }
 
         //Constructor
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
+            FrameContent.Navigate(new HomeView());
 
             MainViewModel.ApplicationStateChangeEvent += ApplicationState_Changed;
             MainViewModel.PageChangeEvent += Page_Changed;
@@ -74,18 +76,21 @@ namespace TwitchDesktop.WPF
 
         private void Page_Changed(OptionButton option)
         {
-            //switch (option)
-            //{
-            //    case OptionButton.Home:
-            //        Dispatcher.Invoke(() => FrameContent.Navigate(new HomePage()));
-            //        break;
-            //    case OptionButton.Following:
-            //        Dispatcher.Invoke(() => FrameContent.Navigate(new FollowsPage()));
-            //        break;
-            //    case OptionButton.Settings:
-            //        Dispatcher.Invoke(() => FrameContent.Navigate(new SettingsPage()));
-            //        break;
-            //}
+            switch (option)
+            {
+                case OptionButton.Home:
+                    Dispatcher.Invoke(() => FrameContent.Navigate(new HomeView()));
+                    break;
+                case OptionButton.Following:
+                    Dispatcher.Invoke(() => FrameContent.Navigate(new FollowingView()));
+                    break;
+                case OptionButton.Settings:
+                    Dispatcher.Invoke(() => FrameContent.Navigate(new SettingsView()));
+                    break;
+                case OptionButton.Auth:
+                    Dispatcher.Invoke(() => FrameContent.Navigate(new AuthView()));
+                    break;
+            }
         }
 
         #endregion

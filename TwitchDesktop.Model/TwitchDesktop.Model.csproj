@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A0E37C11-C328-46EC-85F5-F63F93E7E4FA}</ProjectGuid>
+    <ProjectGuid>{EF232CD9-1890-4B03-B039-95F0096A9AC1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TwitchDesktop.Core</RootNamespace>
-    <AssemblyName>TwitchDesktop.Core</AssemblyName>
+    <RootNamespace>TwitchDesktop.Model</RootNamespace>
+    <AssemblyName>TwitchDesktop.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,15 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,27 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CVO\StreamChannelCVO.cs" />
+    <Compile Include="CVO\UserCVO.cs" />
+    <Compile Include="DAO\AuthResponse.cs" />
+    <Compile Include="DAO\ChannelDAO.cs" />
+    <Compile Include="DAO\PreviewDAO.cs" />
+    <Compile Include="DAO\StreamDAO.cs" />
+    <Compile Include="DAO\StreamsDAO.cs" />
+    <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rest\TwitchApi.cs" />
-    <Compile Include="Server\Program.cs" />
-    <Compile Include="Server\WebServer.cs" />
-    <Compile Include="TwitchInfo\Implementation\TwitchData.cs" />
-    <Compile Include="TwitchInfo\ITwitch.cs" />
-    <Compile Include="TwitchInfo\Twitch.cs" />
-    <Compile Include="TwitchInfo\TwitchFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TwitchDesktop.Common\TwitchDesktop.Common.csproj">
-      <Project>{6c000bd7-25f5-471e-850d-e550facb9b9f}</Project>
-      <Name>TwitchDesktop.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TwitchDesktop.Model\TwitchDesktop.Model.csproj">
-      <Project>{ef232cd9-1890-4b03-b039-95f0096a9ac1}</Project>
-      <Name>TwitchDesktop.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

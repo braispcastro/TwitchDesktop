@@ -51,15 +51,15 @@
                 HorizontalAlignment="Right">
                 <Button
                     x:Name="btnMinimize"
-                    Width="30" Height="30"
+                    Width="20" Height="20"
                     HorizontalAlignment="Right"
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
                     Command="{Binding Path=MinimizeCommand}">
                     <StackPanel
-                        Width="30" Height="15"
-                        Margin="0 12 0 0">
+                        Width="18" Height="10"
+                        Margin="0 8 0 0">
                         <StackPanel.Background>
                             <ImageBrush
                                 ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_minimize_white.png"
@@ -69,14 +69,15 @@
                 </Button>
                 <Button
                     x:Name="btnClose"
-                    Width="30" Height="30"
+                    Width="20" Height="20"
+                    Margin="0 0 4 0"
                     HorizontalAlignment="Right"
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
                     Command="{Binding Path=CloseCommand}">
                     <StackPanel
-                        Width="30" Height="30">
+                        Width="20" Height="20">
                         <StackPanel.Background>
                             <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_close_white.png" Stretch="UniformToFill"/>
                         </StackPanel.Background>
@@ -110,15 +111,16 @@
                     <Grid>
                         <TextBlock
                             Margin="16 0"
-                            Foreground="Azure"
+                            Foreground="White"
                             FontSize="14"
                             Text="HOME"/>
                         <Canvas
+                            x:Name="markHome"
                             Height="1"
                             Margin="8 21 8 0"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Stretch"
-                            Background="Azure"
+                            Background="White"
                             Visibility="{Binding Path=HomeSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </Grid>
                 </Button>
@@ -133,15 +135,16 @@
                     <Grid>
                         <TextBlock
                             Margin="16 0"
-                            Foreground="Azure"
+                            Foreground="White"
                             FontSize="14"
                             Text="FOLLOWING"/>
                         <Canvas
+                            x:Name="markFollowing"
                             Height="1"
                             Margin="8 21 8 0"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Stretch"
-                            Background="Azure"
+                            Background="White"
                             Visibility="{Binding Path=FollowingSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </Grid>
                 </Button>
@@ -156,15 +159,16 @@
                     <Grid>
                         <TextBlock
                             Margin="16 0"
-                            Foreground="Azure"
+                            Foreground="White"
                             FontSize="14"
                             Text="SETTINGS"/>
                         <Canvas
+                            x:Name="markSettings"
                             Height="1"
                             Margin="8 21 8 0"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Stretch"
-                            Background="Azure"
+                            Background="White"
                             Visibility="{Binding Path=SettingsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </Grid>
                 </Button>

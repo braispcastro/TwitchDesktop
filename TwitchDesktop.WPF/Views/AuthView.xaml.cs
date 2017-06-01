@@ -3,6 +3,7 @@ using TwitchDesktop.ViewModel.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using TwitchDesktop.Common.Enumerables;
 
 namespace TwitchDesktop.WPF.Views
 {
@@ -49,7 +50,8 @@ namespace TwitchDesktop.WPF.Views
             Dispatcher.Invoke(() =>
             {
                 //((MainView)Window.GetWindow(this)).StartTimerEvent();
-                ((MainView)Application.Current.MainWindow).FrameContent.Navigate(new HomeView());
+                ((MainView)Application.Current.MainWindow).FrameContent.Navigate(new SettingsView());
+                ((MainView)Application.Current.MainWindow).ChangePage(OptionButton.Settings);
             });
         }
 

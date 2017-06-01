@@ -32,11 +32,19 @@ namespace TwitchDesktop.WPF
         public MainView()
         {
             InitializeComponent();
-            FrameContent.Navigate(new HomeView());
 
             MainViewModel.ApplicationStateChangeEvent += ApplicationState_Changed;
             MainViewModel.PageChangeEvent += Page_Changed;
         }
+
+        #region Private Functions
+
+        public void ChangePage(OptionButton option)
+        {
+            Page_Changed(option);
+        }
+
+        #endregion
 
         #region Private Functions
 

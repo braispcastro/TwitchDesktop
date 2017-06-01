@@ -156,7 +156,10 @@
     <Resource Include="Resources\Icons\ico_minimize_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="mshtml\" />
+    <Resource Include="Resources\Images\user_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\twitch_glitch_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

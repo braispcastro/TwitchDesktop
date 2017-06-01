@@ -25,7 +25,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
         //Constructor
         public MainViewModel()
         {
-            SelectButton(OptionButton.Home);
+            
         }
 
         /// <summary>
@@ -33,7 +33,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
         /// </summary>
         public void Loaded()
         {
-
+            //Vista inicial
+            SelectButton(OptionButton.Home);
         }
 
         #region Event Handlers

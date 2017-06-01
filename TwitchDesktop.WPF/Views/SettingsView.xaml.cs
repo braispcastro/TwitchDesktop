@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TwitchDesktop.Common.Enumerables;
+using TwitchDesktop.ViewModel.ViewModels;
 
 namespace TwitchDesktop.WPF.Views
 {
@@ -20,14 +22,41 @@ namespace TwitchDesktop.WPF.Views
     /// </summary>
     public partial class SettingsView : Page
     {
+        private SettingsViewModel SettingsViewModel
+        {
+            get { return (SettingsViewModel)DataContext; }
+        }
+
+        //Constructor
         public SettingsView()
         {
             InitializeComponent();
+            SettingsViewModel.LoginPressedEvent += Login_Pressed;
         }
+
+        #region Private Functions
 
         private void SettingsView_Loaded(object sender, RoutedEventArgs e)
         {
-
+            SettingsViewModel.Loaded();
         }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(125, 91, 190));
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(100, 65, 164));
+        }
+
+        private void Login_Pressed()
+        {
+            ((MainView)Application.Current.MainWindow).FrameContent.Navigate(new AuthView());
+            ((MainView)Application.Current.MainWindow).ChangePage(OptionButton.Auth);
+        }
+
+        #endregion
     }
 }

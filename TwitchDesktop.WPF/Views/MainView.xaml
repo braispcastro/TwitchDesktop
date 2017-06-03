@@ -56,7 +56,7 @@
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
-                    Command="{Binding Path=MinimizeCommand}">
+                    Command="{Binding MinimizeCommand}">
                     <StackPanel
                         Width="18" Height="10"
                         Margin="0 8 0 0">
@@ -75,7 +75,7 @@
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
-                    Command="{Binding Path=CloseCommand}">
+                    Command="{Binding CloseCommand}">
                     <StackPanel
                         Width="20" Height="20">
                         <StackPanel.Background>
@@ -107,7 +107,7 @@
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
-                    Command="{Binding Path=HomeCommand}">
+                    Command="{Binding HomeCommand}">
                     <Grid>
                         <TextBlock
                             Margin="16 0"
@@ -121,7 +121,7 @@
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Stretch"
                             Background="White"
-                            Visibility="{Binding Path=HomeSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            Visibility="{Binding HomeSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </Grid>
                 </Button>
                 <Button
@@ -131,7 +131,8 @@
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
-                    Command="{Binding Path=FollowingCommand}">
+                    Command="{Binding FollowingCommand}"
+                    IsEnabled="{Binding EnableFollowing}">
                     <Grid>
                         <TextBlock
                             Margin="16 0"
@@ -145,7 +146,7 @@
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Stretch"
                             Background="White"
-                            Visibility="{Binding Path=FollowingSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            Visibility="{Binding FollowingSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </Grid>
                 </Button>
                 <Button
@@ -155,7 +156,7 @@
                     Style="{StaticResource CustomButtonStyle}"
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
-                    Command="{Binding Path=SettingsCommand}">
+                    Command="{Binding SettingsCommand}">
                     <Grid>
                         <TextBlock
                             Margin="16 0"
@@ -169,7 +170,7 @@
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Stretch"
                             Background="White"
-                            Visibility="{Binding Path=SettingsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            Visibility="{Binding SettingsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </Grid>
                 </Button>
                 <!-- FIN LISTA -->

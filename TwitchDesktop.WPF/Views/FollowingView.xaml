@@ -6,14 +6,200 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:TwitchDesktop.WPF.Views"
     xmlns:ViewModel="clr-namespace:TwitchDesktop.ViewModel.ViewModels;assembly=TwitchDesktop.ViewModel"
+    xmlns:Converters="clr-namespace:TwitchDesktop.WPF.Converters"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignHeight="580" d:DesignWidth="960"
     Background="Transparent"
-    Title="FollowingView" Loaded="FollowingView_Loaded">
+    Title="FollowingView"
+    Loaded="FollowingView_Loaded">
     <Page.DataContext>
         <ViewModel:FollowingViewModel />
     </Page.DataContext>
+    <Page.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
-        <TextBlock>FOLLOWING</TextBlock>
+        <ListView
+            Width="960" Height="580"
+            Margin="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="Transparent"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+            ScrollViewer.CanContentScroll="False"
+            ItemsSource="{Binding FollowsList}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter
+                        Property="IsSelected"
+                        Value="{Binding Content.IsSelected, Mode=TwoWay, RelativeSource={RelativeSource Self}}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid
+                        Width="456" Height="257"
+                        Margin="16 8 0 8"
+                        Background="White">
+                        <Image
+                            Width="456" Height="257"
+                            Source="{Binding Preview}"/>
+                        <Canvas
+                            Width="456" Height="257">
+                            <Canvas.Background>
+                                <SolidColorBrush Color="Black" Opacity=".8" />
+                            </Canvas.Background>
+                        </Canvas>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Margin="16 6"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left">
+                            <Image
+                                Width="14" Height="14"
+                                Margin="0 1 0 0"
+                                VerticalAlignment="Center"
+                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_heart_white.png"/>
+                            <TextBlock
+                                Margin="4 0 0 0"
+                                Foreground="White"
+                                Text="{Binding Follows}"/>
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Margin="16 6"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center">
+                            <Image
+                                Width="14" Height="14"
+                                Margin="0 1 0 0"
+                                VerticalAlignment="Center"
+                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_account_red.png"/>
+                            <TextBlock
+                                Margin="4 0 0 0"
+                                Foreground="White"
+                                Text="{Binding Viewers}"/>
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Margin="16 6"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right">
+                            <Image
+                                Width="14" Height="14"
+                                Margin="0 1 0 0"
+                                VerticalAlignment="Center"
+                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_eye_white.png"/>
+                            <TextBlock
+                                Margin="4 0 0 0"
+                                Foreground="White"
+                                Text="{Binding Views}"/>
+                        </StackPanel>
+                        <Button
+                            x:Name="btnWebBrowser"
+                            Width="36" Height="36"
+                            Margin="16"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.BrowserCommand}"
+                            CommandParameter="{Binding}">
+                            <Image
+                                Width="24" Height="24"
+                                Margin="0 0 1 0"
+                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_edge_blue.png"
+                                Stretch="Uniform"/>
+                        </Button>
+                        <Button
+                            x:Name="btnVideoPlayer"
+                            Width="36" Height="36"
+                            Margin="16"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.PlayerCommand}"
+                            CommandParameter="{Binding}">
+                            <Image
+                                Width="21" Height="21"
+                                Margin="0 0 0 4"
+                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_vlc_orange.png"
+                                Stretch="Uniform"/>
+                        </Button>
+                        <StackPanel
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                            <Grid
+                                Width="80" Height="80">
+                                <Canvas>
+                                    <Canvas.Background>
+                                        <SolidColorBrush Color="White" Opacity=".5" />
+                                    </Canvas.Background>
+                                </Canvas>
+                                <Rectangle
+                                    Stroke="White">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding Logo}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Grid>
+                            <TextBlock
+                                Height="24"
+                                Margin="4 4 4 0"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                TextWrapping="Wrap"
+                                TextTrimming="CharacterEllipsis"
+                                Text="{Binding ChannelName}"/>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Margin="4 4 4 0"
+                                HorizontalAlignment="Center">
+                                <Image
+                                    Width="18" Height="18"
+                                    Margin="0 3 0 0"
+                                    VerticalAlignment="Center"
+                                    Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_gamepad_white.png"/>
+                                <TextBlock
+                                    Height="21"
+                                    Margin="4 0 0 0"
+                                    Foreground="White"
+                                    FontSize="16"
+                                    TextWrapping="Wrap"
+                                    TextTrimming="CharacterEllipsis"
+                                    Text="{Binding Game}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBlock
+                            Height="21"
+                            Margin="6"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Foreground="White"
+                            TextWrapping="Wrap"
+                            TextTrimming="CharacterEllipsis"
+                            Text="{Binding StreamTitle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

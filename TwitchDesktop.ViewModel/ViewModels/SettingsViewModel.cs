@@ -73,19 +73,10 @@ namespace TwitchDesktop.ViewModel.ViewModels
             UsernameText = !string.IsNullOrEmpty(Configuration.Username) ? Configuration.Username : string.Empty;
             NeedAuth = !Configuration.UserAuthenticated;
         }
-
-        /// <summary>
-        /// Se ejecuta cuando se carga la vista
-        /// </summary>
+        
         public void Loaded()
         {
 
         }
-
-        #region Private Functions
-
-        
-
-        #endregion
     }
 }

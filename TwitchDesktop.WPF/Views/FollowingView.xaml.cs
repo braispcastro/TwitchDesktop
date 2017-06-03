@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TwitchDesktop.ViewModel.ViewModels;
 
 namespace TwitchDesktop.WPF.Views
 {
@@ -20,14 +21,23 @@ namespace TwitchDesktop.WPF.Views
     /// </summary>
     public partial class FollowingView : Page
     {
+        public FollowingViewModel FollowingViewModel
+        {
+            get { return (FollowingViewModel)DataContext; }
+        }
+
         public FollowingView()
         {
             InitializeComponent();
         }
 
+        #region Private Methods
+
         private void FollowingView_Loaded(object sender, RoutedEventArgs e)
         {
-
+            FollowingViewModel.Loaded();
         }
+
+        #endregion
     }
 }

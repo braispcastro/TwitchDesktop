@@ -11,6 +11,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private readonly ITwitch twitchData;
         public Program svcProgram;
 
+        #region Event Handlers
+
         public delegate void FinishAuthEventHandler();
         public FinishAuthEventHandler FinishAuthEvent;
         private void OnFinishAuthEvent()
@@ -18,6 +20,9 @@ namespace TwitchDesktop.ViewModel.ViewModels
             FinishAuthEvent?.Invoke();
         }
 
+        #endregion
+
+        //Constructor
         public AuthViewModel()
         {
             twitchData = TwitchFactory.Instance.GetTwitch();
@@ -26,7 +31,12 @@ namespace TwitchDesktop.ViewModel.ViewModels
             svcProgram.FinishAuthEvent += FinishAuth_Event;
         }
 
-        #region Public Functions
+        public void Loaded()
+        {
+
+        }
+
+        #region Public Methods
 
         public void InitAuthServer()
         {

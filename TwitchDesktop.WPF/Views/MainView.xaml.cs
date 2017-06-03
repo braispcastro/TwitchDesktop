@@ -37,16 +37,21 @@ namespace TwitchDesktop.WPF
             MainViewModel.PageChangeEvent += Page_Changed;
         }
 
+        #region Public Functions
+
+        public void StartTimerEvent()
+        {
+            MainViewModel.StartFollowsTimer();
+        }
+
+        #endregion
+
         #region Private Functions
 
         public void ChangePage(OptionButton option)
         {
             Page_Changed(option);
         }
-
-        #endregion
-
-        #region Private Functions
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

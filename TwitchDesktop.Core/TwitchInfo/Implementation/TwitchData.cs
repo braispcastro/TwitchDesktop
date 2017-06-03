@@ -10,8 +10,8 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
     public class TwitchData : ITwitch
     {
         private TwitchApi twitchRest;
-        private const int width = 231;
-        private const int height = 130;
+        private const int width = 456;
+        private const int height = 257;
 
         public TwitchData()
         {
@@ -30,6 +30,7 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
             }
             catch (Exception ex)
             {
+                var error = ex.Message;
                 result = false;
             }
 

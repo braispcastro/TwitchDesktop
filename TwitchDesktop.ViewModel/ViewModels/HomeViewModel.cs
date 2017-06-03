@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchDesktop.ViewModel.ViewModels
 {
-    public class HomeViewModel
+    public class HomeViewModel : BaseViewModel
     {
 
     }

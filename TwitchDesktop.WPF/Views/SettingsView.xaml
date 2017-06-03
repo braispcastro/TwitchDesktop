@@ -38,14 +38,12 @@
     </Page.Resources>
     <Grid>
         <!-- ACCOUNT -->
-        <TextBlock
-            Margin="202 36 24 24"
+        <Image
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontSize="20"
-            FontWeight="Bold"
-            Text="ACCOUNT"
-            Foreground="White"/>
+            Width="32" Height="32"
+            Margin="232 32 0 0"
+            Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_account_white.png"/>
         <Grid
             Width="420"
             Margin="38 72 38 38"
@@ -57,7 +55,7 @@
                 VerticalAlignment="Top"
                 Stroke="White">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding Path=UserImage}"/>
+                    <ImageBrush ImageSource="{Binding UserImage}"/>
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock
@@ -66,7 +64,7 @@
                 VerticalAlignment="Center"
                 FontSize="20"
                 FontWeight="Bold"
-                Text="{Binding Path=UsernameText}"
+                Text="{Binding UsernameText}"
                 Foreground="White"/>
             <Button
                 Height="50"
@@ -81,14 +79,14 @@
                 <Grid
                     Width="350" Height="50">
                     <Image
-                        Margin="8"
+                        Margin="9"
                         HorizontalAlignment="Left"
                         Source="/TwitchDesktop.WPF;component/Resources/Images/twitch_glitch_white.png" />
                     <TextBlock
-                        Margin="32 0 0 2"
+                        Margin="28 0 0 2"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        FontSize="24"
+                        FontSize="22"
                         FontWeight="Bold"
                         Text="LOG IN WITH TWITCH"
                         Foreground="White"/>
@@ -96,14 +94,12 @@
             </Button>
         </Grid>
         <!-- OPTIONS -->
-        <TextBlock
-            Margin="665 36 24 24"
-            HorizontalAlignment="Left"
+        <Image
+            HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            FontSize="20"
-            FontWeight="Bold"
-            Text="OPTIONS"
-            Foreground="White"/>
+            Width="32" Height="32"
+            Margin="0 32 232 0"
+            Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_settings_white.png"/>
         <Grid
             Width="420"
             Margin="38 72 38 38"

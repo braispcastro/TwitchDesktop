@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using TwitchDesktop.Common.Enumerables;
+using System;
 
 namespace TwitchDesktop.WPF.Views
 {
@@ -29,6 +30,10 @@ namespace TwitchDesktop.WPF.Views
 
         private void AuthView_Loaded(object sender, RoutedEventArgs e)
         {
+            ((MainView)Application.Current.MainWindow).btnHome.IsEnabled = false;
+            ((MainView)Application.Current.MainWindow).btnFollowing.IsEnabled = false;
+            ((MainView)Application.Current.MainWindow).btnSettings.IsEnabled = false;
+
             if (string.IsNullOrEmpty(Configuration.AccessToken) || AuthViewModel.InvalidSavedToken())
             {
                 AuthViewModel.InitAuthServer();
@@ -46,12 +51,21 @@ namespace TwitchDesktop.WPF.Views
 
         private void FinishAuth_Event()
         {
-            //TODO: Start follows timer
             Dispatcher.Invoke(() =>
             {
-                //((MainView)Window.GetWindow(this)).StartTimerEvent();
-                ((MainView)Application.Current.MainWindow).FrameContent.Navigate(new SettingsView());
-                ((MainView)Application.Current.MainWindow).ChangePage(OptionButton.Settings);
+                try
+                {
+                    ((MainView)Application.Current.MainWindow).StartTimerEvent();
+                    ((MainView)Application.Current.MainWindow).ChangePage(OptionButton.Settings);
+
+                    ((MainView)Application.Current.MainWindow).btnHome.IsEnabled = true;
+                    ((MainView)Application.Current.MainWindow).btnFollowing.IsEnabled = true;
+                    ((MainView)Application.Current.MainWindow).btnSettings.IsEnabled = true;
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.Message;
+                }
             });
         }
 

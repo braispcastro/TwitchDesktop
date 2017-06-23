@@ -4,6 +4,7 @@ using TwitchDesktop.Model.DAO;
 using TwitchDesktop.Common;
 using System.Collections.Generic;
 using TwitchDesktop.Model.Rest;
+using System.Globalization;
 
 namespace TwitchDesktop.Core.TwitchInfo.Implementation
 {
@@ -91,13 +92,18 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
             if (streamsInfo == null || streamsInfo.streams == null)
                 return null;
 
+            NumberFormatInfo numberFormat = new NumberFormatInfo()
+            {
+                NumberGroupSizes = new[] { 3 },
+                NumberGroupSeparator = "."
+            };
             List<StreamChannelCVO> auxList = new List<StreamChannelCVO>();
             foreach(var stream in streamsInfo.streams)
             {
                 StreamChannelCVO aux = new StreamChannelCVO
                 {
                     ChannelName = stream.channel.display_name,
-                    Follows = stream.channel.followers,
+                    Follows = stream.channel.followers.ToString("N0", numberFormat),
                     Game = stream.channel.game,
                     IsPlaylist = stream.is_playlist,
                     Logo = stream.channel.logo,
@@ -105,7 +111,8 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
                     StreamTitle = stream.channel.status,
                     Url = stream.channel.url,
                     Viewers = stream.viewers,
-                    Views = stream.channel.views
+                    ViewersDisplay = stream.viewers.ToString("N0", numberFormat),
+                    Views = stream.channel.views.ToString("N0", numberFormat)
                 };
 
                 auxList.Add(aux);

@@ -92,7 +92,7 @@
                             <TextBlock
                                 Margin="4 0 0 0"
                                 Foreground="White"
-                                Text="{Binding Viewers}"/>
+                                Text="{Binding ViewersDisplay}"/>
                         </StackPanel>
                         <StackPanel
                             Orientation="Horizontal"

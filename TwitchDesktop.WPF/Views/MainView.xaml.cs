@@ -35,6 +35,7 @@ namespace TwitchDesktop.WPF
 
             MainViewModel.ApplicationStateChangeEvent += ApplicationState_Changed;
             MainViewModel.PageChangeEvent += Page_Changed;
+            MainViewModel.UpdateFollowsListEvent += UpdateFollows;
         }
 
         #region Public Functions
@@ -105,6 +106,16 @@ namespace TwitchDesktop.WPF
                     break;
             }
         }
+
+        private void UpdateFollows()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (FrameContent.Content is FollowingView)
+                    ((FollowingView)FrameContent.Content).FollowingViewModel.UpdateList();
+            });
+        }
+
 
         #endregion
     }

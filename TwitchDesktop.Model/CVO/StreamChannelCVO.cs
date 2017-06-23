@@ -10,8 +10,9 @@ namespace TwitchDesktop.Model.CVO
     {
         private string _channelName;
         private long _viewers;
-        private long _follows;
-        private long _views;
+        private string _viewersDisplay;
+        private string _follows;
+        private string _views;
         private string _streamTitle;
         private string _game;
         private string _logo;
@@ -31,13 +32,19 @@ namespace TwitchDesktop.Model.CVO
             set { _viewers = value; }
         }
 
-        public long Follows
+        public string ViewersDisplay
+        {
+            get { return _viewersDisplay; }
+            set { _viewersDisplay = value; }
+        }
+
+        public string Follows
         {
             get { return _follows; }
             set { _follows = value; }
         }
 
-        public long Views
+        public string Views
         {
             get { return _views; }
             set { _views = value; }

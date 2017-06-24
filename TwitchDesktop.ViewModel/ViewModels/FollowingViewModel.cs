@@ -18,6 +18,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private ObservableCollection<StreamChannelCVO> _followsList;
         private ICommand _browserCommand;
         private ICommand _playerCommand;
+        private double _scrollWidth;
+        private double _maxScrollBar = 960;
 
         public ObservableCollection<StreamChannelCVO> FollowsList
         {
@@ -25,6 +27,16 @@ namespace TwitchDesktop.ViewModel.ViewModels
             set
             {
                 _followsList = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double ScrollWidth
+        {
+            get { return _scrollWidth; }
+            set
+            {
+                _scrollWidth = value;
                 NotifyPropertyChanged();
             }
         }
@@ -46,7 +58,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
         //Constructor
         public FollowingViewModel()
         {
-
+            ScrollWidth = 0;
         }
 
         public void Loaded()
@@ -60,6 +72,26 @@ namespace TwitchDesktop.ViewModel.ViewModels
         {
             FollowsList = new ObservableCollection<StreamChannelCVO>();
             FollowsList = new ObservableCollection<StreamChannelCVO>(MainViewModel.StreamList);
+        }
+
+        public void UpdateScroll(double topScroll, double maxScroll)
+        {
+            if (topScroll == 0)
+            {
+                //Estoy arriba del todo
+                ScrollWidth = 0;
+            }
+            else if (topScroll == maxScroll)
+            {
+                //Estoy abajo del todo
+                ScrollWidth = _maxScrollBar;
+            }
+            else
+            {
+                //Estoy en el medio
+                double percentage = (topScroll * 100) / maxScroll;
+                ScrollWidth = (percentage * _maxScrollBar) / 100;
+            }
         }
 
         #endregion
@@ -83,7 +115,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
             try
             {
                 string livestreamer = AppDomain.CurrentDomain.BaseDirectory + "livestreamer\\livestreamer.exe";
-                string quality = "best"; //Configuration.GetQualityString((Quality)Configuration.StreamQuality);
+                string quality = "best";
                 string channelurl = stream.Url;
                 string cliendId = Constants.TwitchClientId;
                 string vlcPath = "D:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
@@ -104,6 +136,11 @@ namespace TwitchDesktop.ViewModel.ViewModels
             {
                 var error = ex.Message;
             }
+        }
+
+        private double GetScrollValue()
+        {
+            return ScrollWidth;
         }
 
         #endregion

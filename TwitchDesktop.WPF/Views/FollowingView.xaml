@@ -20,15 +20,25 @@
         <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Page.Resources>
     <Grid>
-        <ListView
-            Width="960" Height="580"
-            Margin="1"
+        <Canvas
+            Width="960" Height="2"
+            Background="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top">
+            <Canvas
+                Width="{Binding ScrollWidth}" Height="2"
+                Background="OrangeRed"/>
+        </Canvas>
+        <ListView
+            Width="960" Height="578"
+            Margin="1 2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
             Background="Transparent"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Hidden"
             ScrollViewer.CanContentScroll="False"
+            ScrollViewer.ScrollChanged="ListView_ScrollChanged"
             ItemsSource="{Binding FollowsList}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

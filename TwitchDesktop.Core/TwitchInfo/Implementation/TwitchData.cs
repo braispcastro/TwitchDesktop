@@ -127,7 +127,12 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
                 return string.Empty;
 
             url = url.Replace("width", "0").Replace("height", "1");
-            return string.Format(url, width, height);
+            string imageUrl = string.Format(url, width, height);
+
+            //Hack para forzar el refresco del preview cada vez que se actualiza la lista
+            string imageHack = imageUrl + "?forceRefresh=" + new Random().Next();
+
+            return imageHack;
         }
 
         #endregion

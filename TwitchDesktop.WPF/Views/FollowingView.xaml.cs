@@ -38,6 +38,12 @@ namespace TwitchDesktop.WPF.Views
             FollowingViewModel.Loaded();
         }
 
+        private void ListView_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            double maxScroll = e.ExtentHeight - e.ViewportHeight;
+            FollowingViewModel.UpdateScroll(e.VerticalOffset, maxScroll);
+        }
+
         #endregion
     }
 }

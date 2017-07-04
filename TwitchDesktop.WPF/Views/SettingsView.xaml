@@ -50,7 +50,7 @@
             HorizontalAlignment="Left"
             Background="#201C2B">
             <Ellipse
-                Width="180" Height="180"
+                Width="120" Height="120"
                 Margin="0 58 0 0"
                 VerticalAlignment="Top"
                 Stroke="White">
@@ -59,34 +59,90 @@
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock
-                Margin="0 84 0 0"
+                Margin="0 26 0 0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="24"
+                Foreground="White"
+                Text="USERNAME"
+                Visibility="{Binding Authed, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <TextBlock
+                Margin="0 100 0 0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"
                 FontWeight="Bold"
+                Foreground="White"
                 Text="{Binding UsernameText}"
-                Foreground="White"/>
+                Visibility="{Binding Authed, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <StackPanel
+                Width="420" Height="90"
+                Margin="0 0 0 28"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal"
+                Visibility="{Binding Authed, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Grid
+                    Width="210" Height="90">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        TextAlignment="Center"
+                        Foreground="White"
+                        FontSize="24"
+                        Text="FOLLOWING"/>
+                    <TextBlock
+                        Margin="0 16 0 0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="20"
+                        Text="{Binding TotalCount}"/>
+                </Grid>
+                <Grid
+                    Width="210" Height="90">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        TextAlignment="Center"
+                        Foreground="White"
+                        FontSize="24"
+                        Text="STREAMING"/>
+                    <TextBlock
+                        Margin="0 16 0 0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="20"
+                        Text="{Binding LiveCount}"/>
+                </Grid>
+            </StackPanel>
             <Button
-                Height="50"
-                Margin="36 0 36 36"
+                Height="36"
+                Margin="90 0 90 28"
                 VerticalAlignment="Bottom"
                 Background="#6441A4"
                 Style="{StaticResource CustomButtonStyle}"
                 MouseEnter="Button_MouseEnter"
                 MouseLeave="Button_MouseLeave"
                 Command="{Binding LoginCommand}"
-                IsEnabled="{Binding NeedAuth}">
+                IsEnabled="{Binding NeedAuth}"
+                Visibility="{Binding NeedAuth, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid
-                    Width="350" Height="50">
+                    Width="240" Height="36">
                     <Image
-                        Margin="9"
+                        Margin="7"
                         HorizontalAlignment="Left"
                         Source="/TwitchDesktop.WPF;component/Resources/Images/twitch_glitch_white.png" />
                     <TextBlock
                         Margin="28 0 0 2"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        FontSize="22"
+                        FontSize="16"
                         FontWeight="Bold"
                         Text="LOG IN WITH TWITCH"
                         Foreground="White"/>

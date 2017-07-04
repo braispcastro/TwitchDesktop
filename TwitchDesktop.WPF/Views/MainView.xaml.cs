@@ -112,7 +112,13 @@ namespace TwitchDesktop.WPF
             Dispatcher.Invoke(() =>
             {
                 if (FrameContent.Content is FollowingView)
+                {
                     ((FollowingView)FrameContent.Content).FollowingViewModel.UpdateList();
+                }
+                else if (FrameContent.Content is SettingsView)
+                {
+                    ((SettingsView)FrameContent.Content).SettingsViewModel.RefreshCounters();
+                }
             });
         }
 

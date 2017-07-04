@@ -15,6 +15,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
     public class MainViewModel : BaseViewModel
     {
         public static List<StreamChannelCVO> StreamList;
+        public static string TotalChannelsCount;
+        public static string LiveChannelsCount;
 
         private readonly ITwitch twitchData;
         private ICommand _minimizeCommand;
@@ -27,7 +29,6 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private bool _homeSelected;
         private bool _followingSelected;
         private bool _settingsSelected;
-        private string _channelsCount;
 
         public OptionButton OptionSelected
         {
@@ -65,19 +66,9 @@ namespace TwitchDesktop.ViewModel.ViewModels
             }
         }
 
-        public string ChannelsCount
-        {
-            get { return _channelsCount; }
-            set
-            {
-                _channelsCount = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public bool EnableFollowing
         {
-            get { return !string.IsNullOrEmpty(ChannelsCount) && ChannelsCount != "0"; }
+            get { return !string.IsNullOrEmpty(LiveChannelsCount) && LiveChannelsCount != "0"; }
         }
 
         #region Commands
@@ -138,7 +129,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
         public MainViewModel()
         {
             twitchData = TwitchFactory.Instance.GetTwitch();
-            ChannelsCount = string.Empty;
+            LiveChannelsCount = string.Empty;
+            TotalChannelsCount = string.Empty;
             StreamList = new List<StreamChannelCVO>();
 
             followsTimer = new Timer();
@@ -217,8 +209,9 @@ namespace TwitchDesktop.ViewModel.ViewModels
             await Task.Run(() =>
             {
                 //Ordeno por viewers y solo añado a la lista los canales en directo (sin listas de reproducción)
-                StreamList = twitchData.GetFollowedStreams().Where(x => !x.IsPlaylist).OrderByDescending(y => y.Viewers).ToList();
-                ChannelsCount = StreamList.Count.ToString();
+                StreamList = twitchData.GetFollowedStreamsLive().Where(x => !x.IsPlaylist).OrderByDescending(y => y.Viewers).ToList();
+                TotalChannelsCount = twitchData.GetFollowedStreamsCount().ToString();
+                LiveChannelsCount = StreamList.Count.ToString();
             });
 
             OnUpdateFollowsList();

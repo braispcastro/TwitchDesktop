@@ -31,7 +31,7 @@
         </Canvas>
         <ListView
             Width="960" Height="578"
-            Margin="1 2"
+            Margin="1 2 1 0"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Background="Transparent"

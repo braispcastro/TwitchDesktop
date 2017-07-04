@@ -8,8 +8,15 @@ namespace TwitchDesktop.Model.CVO
 {
     public class UserCVO
     {
+        private long _userId;
         private string _username;
         private string _logo;
+
+        public long UserId
+        {
+            get { return _userId; }
+            set { _userId = value; }
+        }
 
         public string Username
         {

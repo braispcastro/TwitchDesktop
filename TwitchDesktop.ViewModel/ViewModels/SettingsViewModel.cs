@@ -14,7 +14,10 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private ICommand _loginCommand;
         private string _userImage;
         private string _usernameText;
+        private string _liveCount;
+        private string _totalCount;
         private bool _needAuth;
+        private bool _authed;
 
         public string UserImage
         {
@@ -36,6 +39,26 @@ namespace TwitchDesktop.ViewModel.ViewModels
             }
         }
 
+        public string LiveCount
+        {
+            get { return _liveCount; }
+            set
+            {
+                _liveCount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string TotalCount
+        {
+            get { return _totalCount; }
+            set
+            {
+                _totalCount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public bool NeedAuth
         {
             get { return _needAuth; }
@@ -45,6 +68,17 @@ namespace TwitchDesktop.ViewModel.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
+        public bool Authed
+        {
+            get { return _authed; }
+            set
+            {
+                _authed = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #region Commands
 
@@ -72,11 +106,23 @@ namespace TwitchDesktop.ViewModel.ViewModels
             UserImage = !string.IsNullOrEmpty(Configuration.UserLogo) ? Configuration.UserLogo : "/TwitchDesktop.WPF;component/Resources/Images/user_image.png";
             UsernameText = !string.IsNullOrEmpty(Configuration.Username) ? Configuration.Username : string.Empty;
             NeedAuth = !Configuration.UserAuthenticated;
+            Authed = Configuration.UserAuthenticated;
+            RefreshCounters();
         }
         
         public void Loaded()
         {
 
         }
+
+        #region Public Methods
+
+        public void RefreshCounters()
+        {
+            TotalCount = Authed ? MainViewModel.TotalChannelsCount : string.Empty;
+            LiveCount = Authed ? MainViewModel.LiveChannelsCount : string.Empty;
+        }
+
+        #endregion
     }
 }

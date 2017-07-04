@@ -45,6 +45,7 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
                 var userInfo = twitchRest.GetUserInfo();
                 var userdata = BuildUserCVO(userInfo);
                 Configuration.UserAuthenticated = !string.IsNullOrEmpty(userdata.Username);
+                Configuration.UserId = userdata.UserId;
                 Configuration.Username = userdata.Username;
                 Configuration.UserLogo = userdata.Logo;
             }
@@ -54,14 +55,31 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
             }
         }
 
-        public List<StreamChannelCVO> GetFollowedStreams()
+        public List<StreamChannelCVO> GetFollowedStreamsLive()
         {
             List<StreamChannelCVO> result = new List<StreamChannelCVO>();
 
             try
             {
-                var streamInfo = twitchRest.GetFollowedStreams();
+                var streamInfo = twitchRest.GetLiveFollowedStreams("all", 0);
                 result = BuildStreamsCVO(streamInfo);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+
+            return result;
+        }
+
+        public int GetFollowedStreamsCount()
+        {
+            int result = 0;
+
+            try
+            {
+                var streamInfo = twitchRest.GetTotalFollowedStreams(Configuration.UserId, 0);
+                result = streamInfo._total;
             }
             catch (Exception ex)
             {
@@ -82,6 +100,7 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
 
             return new UserCVO
             {
+                UserId = userInfo._id,
                 Username = userInfo.display_name,
                 Logo = userInfo.logo
             };

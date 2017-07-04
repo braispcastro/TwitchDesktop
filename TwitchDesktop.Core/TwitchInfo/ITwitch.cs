@@ -7,6 +7,7 @@ namespace TwitchDesktop.Core.TwitchInfo
     {
         bool CheckValidToken();
         void GetUserInfo();
-        List<StreamChannelCVO> GetFollowedStreams();
+        List<StreamChannelCVO> GetFollowedStreamsLive();
+        int GetFollowedStreamsCount();
     }
 }

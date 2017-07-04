@@ -22,7 +22,7 @@ namespace TwitchDesktop.WPF.Views
     /// </summary>
     public partial class SettingsView : Page
     {
-        private SettingsViewModel SettingsViewModel
+        public SettingsViewModel SettingsViewModel
         {
             get { return (SettingsViewModel)DataContext; }
         }

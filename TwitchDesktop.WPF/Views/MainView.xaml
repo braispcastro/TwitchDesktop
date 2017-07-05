@@ -138,7 +138,7 @@
                             Margin="16 0"
                             Foreground="White"
                             FontSize="14"
-                            Text="FOLLOWING"/>
+                            Text="STREAMING"/>
                         <Canvas
                             x:Name="markFollowing"
                             Height="1"

@@ -196,12 +196,62 @@
             Width="32" Height="32"
             Margin="0 32 232 0"
             Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_settings_white.png"/>
-        <Grid
+        <StackPanel
             Width="420"
             Margin="38 72 38 38"
             HorizontalAlignment="Right"
+            Orientation="Vertical"
             Background="#201C2B">
+            <Grid
+                x:Name="optLanguage"
+                Width="420" Height="94">
+                <Image
+                    Margin="24 28"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_flag_white.png"/>
+            </Grid>
+            <Grid
+                x:Name="optDelay"
+                Width="420" Height="94">
+                <Image
+                    Margin="24 28"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_timer_white.png"/>
+                <Slider
+                    x:Name="SliderRefreshTimer"
+                    Width="240"
+                    Margin="0 0 0 0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Minimum="3" Maximum="12"
+                    TickFrequency="3"
+                    SmallChange="3" LargeChange="3"
+                    TickPlacement="Both"
+                    IsSnapToTickEnabled="True"
+                    ValueChanged="SliderRefreshTimer_ValueChanged"
+                    Value="{Binding RefreshTimer}"/>
+                <TextBlock
+                    Margin="0 0 24 0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    FontSize="16"
+                    Text="{Binding TimerValue}"/>
+            </Grid>
+            <Grid
+                Width="420" Height="94">
 
-        </Grid>
+            </Grid>
+            <Grid
+                Width="420" Height="94">
+
+            </Grid>
+            <Grid
+                Width="420" Height="94">
+
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

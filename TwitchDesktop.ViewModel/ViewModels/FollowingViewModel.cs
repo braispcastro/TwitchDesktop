@@ -131,6 +131,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
                     process.StartInfo = startInfo;
                     process.Start();
                 }
+                
             }
             catch (Exception ex)
             {

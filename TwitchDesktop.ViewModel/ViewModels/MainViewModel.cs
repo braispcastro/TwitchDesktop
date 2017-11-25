@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
+using TwitchDesktop.Common;
 using TwitchDesktop.Common.Enumerables;
 using TwitchDesktop.Core.TwitchInfo;
 using TwitchDesktop.Model.CVO;
@@ -135,7 +136,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
 
             followsTimer = new Timer();
             followsTimer.Elapsed += CheckTimer_Elapsed;
-            followsTimer.Interval = 180000; //3 minutos
+            followsTimer.Interval = Configuration.RefreshTimer * 60000;
         }
         
         public void Loaded()
@@ -148,7 +149,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
 
         public void StartFollowsTimer()
         {
-            if (!followsTimer.Enabled)
+            if (followsTimer != null && !followsTimer.Enabled)
             {
                 GetFollowsList();
                 followsTimer.Enabled = true;
@@ -157,7 +158,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
 
         public void StopFollowsTimer()
         {
-            if (followsTimer.Enabled)
+            if (followsTimer != null && followsTimer.Enabled)
                 followsTimer.Enabled = false;
         }
 

@@ -23,7 +23,7 @@ namespace TwitchDesktop.WPF
     /// </summary>
     public partial class MainView : Window
     {
-        private MainViewModel MainViewModel
+        public MainViewModel MainViewModel
         {
             get { return (MainViewModel)DataContext; }
         }

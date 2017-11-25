@@ -18,6 +18,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private string _totalCount;
         private bool _needAuth;
         private bool _authed;
+        private string _timerValue;
+        private double _refreshTimer;
 
         public string UserImage
         {
@@ -79,6 +81,26 @@ namespace TwitchDesktop.ViewModel.ViewModels
             }
         }
 
+        public string TimerValue
+        {
+            get { return _timerValue; }
+            set
+            {
+                _timerValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double RefreshTimer
+        {
+            get { return _refreshTimer; }
+            set
+            {
+                _refreshTimer = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #region Commands
 
@@ -103,6 +125,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
         //Constructor
         public SettingsViewModel()
         {
+            RefreshTimer = Configuration.RefreshTimer;
             UserImage = !string.IsNullOrEmpty(Configuration.UserLogo) ? Configuration.UserLogo : "/TwitchDesktop.WPF;component/Resources/Images/user_image.png";
             UsernameText = !string.IsNullOrEmpty(Configuration.Username) ? Configuration.Username : string.Empty;
             NeedAuth = !Configuration.UserAuthenticated;
@@ -112,7 +135,6 @@ namespace TwitchDesktop.ViewModel.ViewModels
         
         public void Loaded()
         {
-
         }
 
         #region Public Methods
@@ -121,6 +143,12 @@ namespace TwitchDesktop.ViewModel.ViewModels
         {
             TotalCount = Authed ? MainViewModel.TotalChannelsCount : string.Empty;
             LiveCount = Authed ? MainViewModel.LiveChannelsCount : string.Empty;
+        }
+
+        public void SliderValueChanged(double value)
+        {
+            TimerValue = string.Format("{0}min.", value);
+            Configuration.RefreshTimer = value;
         }
 
         #endregion

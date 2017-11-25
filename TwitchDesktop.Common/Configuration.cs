@@ -18,6 +18,16 @@ namespace TwitchDesktop.Common
             }
         }
 
+        public static double RefreshTimer
+        {
+            get { return Settings.Default.RefreshTimer; }
+            set
+            {
+                Settings.Default.RefreshTimer = value;
+                Settings.Default.Save();
+            }
+        }
+
         private static bool? _userAuthenticated;
         public static bool UserAuthenticated
         {

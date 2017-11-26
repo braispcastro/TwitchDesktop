@@ -8,6 +8,7 @@ using System.Timers;
 using System.Windows.Input;
 using TwitchDesktop.Common;
 using TwitchDesktop.Common.Enumerables;
+using TwitchDesktop.Core.Services;
 using TwitchDesktop.Core.TwitchInfo;
 using TwitchDesktop.Model.CVO;
 
@@ -145,7 +146,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
             SelectButton(OptionButton.Home);
         }
 
-        #region Public Functions
+        #region Public Methods
 
         public void StartFollowsTimer()
         {
@@ -173,7 +174,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
 
         #endregion
 
-        #region Private Functions
+        #region Private Methods
 
         private void OnMinimizeCommand()
         {
@@ -183,6 +184,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private void OnCloseCommand()
         {
             OnApplicationStateChangeEvent(ApplicationState.Close);
+            PlayerVLCService.Instance.Stop();
         }
 
         private void OnHomeCommand()

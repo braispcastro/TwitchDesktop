@@ -38,7 +38,7 @@ namespace TwitchDesktop.WPF
             MainViewModel.UpdateFollowsListEvent += UpdateFollows;
         }
 
-        #region Public Functions
+        #region Public Methods
 
         public void StartTimerEvent()
         {
@@ -47,7 +47,7 @@ namespace TwitchDesktop.WPF
 
         #endregion
 
-        #region Private Functions
+        #region Private Methods
 
         public void ChangePage(OptionButton option)
         {

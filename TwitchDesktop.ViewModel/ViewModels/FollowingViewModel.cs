@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TwitchDesktop.Common;
+using TwitchDesktop.Common.Enumerables;
+using TwitchDesktop.Core.Services;
 using TwitchDesktop.Core.TwitchInfo;
 using TwitchDesktop.Model.CVO;
 
@@ -43,13 +45,6 @@ namespace TwitchDesktop.ViewModel.ViewModels
             }
         }
 
-        public delegate void PlayAudioEventHandler(string streamFile);
-        public PlayAudioEventHandler PlayAudioEvent;
-        private void OnPlayAudioEvent(string streamFile)
-        {
-            PlayAudioEvent?.Invoke(streamFile);
-        }
-
         #region Commands
 
         public ICommand BrowserCommand
@@ -60,6 +55,17 @@ namespace TwitchDesktop.ViewModel.ViewModels
         public ICommand PlayerCommand
         {
             get { return _playerCommand ?? (_playerCommand = new RelayCommand<StreamChannelCVO>(OnPlayerCommand)); }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        public delegate void RadioPressedEventHandler();
+        public RadioPressedEventHandler RadioPressedEvent;
+        private void OnRadioPressedChangeEvent()
+        {
+            RadioPressedEvent?.Invoke();
         }
 
         #endregion
@@ -76,7 +82,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
             UpdateList();
         }
 
-        #region Public Functions
+        #region Public Methods
 
         public void UpdateList()
         {
@@ -106,7 +112,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
 
         #endregion
 
-        #region Private Functions
+        #region Private Methods
 
         private void OnBrowserCommand(StreamChannelCVO stream)
         {
@@ -125,7 +131,9 @@ namespace TwitchDesktop.ViewModel.ViewModels
             try
             {
                 var streamFile = twitchData.GetAudioFromChannel(stream.ChannelName.ToLowerInvariant());
-                OnPlayAudioEvent(streamFile);
+                Uri uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + streamFile);
+                PlayerVLCService.Instance.Play(uri);
+                OnRadioPressedChangeEvent();
             }
             catch (Exception ex)
             {

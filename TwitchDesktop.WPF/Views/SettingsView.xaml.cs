@@ -34,7 +34,7 @@ namespace TwitchDesktop.WPF.Views
             SettingsViewModel.LoginPressedEvent += Login_Pressed;
         }
 
-        #region Private Functions
+        #region Private Methods
 
         private void SettingsView_Loaded(object sender, RoutedEventArgs e)
         {

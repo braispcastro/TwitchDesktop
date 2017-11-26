@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using TwitchDesktop.Common.Enumerables;
 using TwitchDesktop.ViewModel.ViewModels;
-using TwitchDesktop.WPF.Services;
 
 namespace TwitchDesktop.WPF.Views
 {
@@ -20,7 +19,7 @@ namespace TwitchDesktop.WPF.Views
         public FollowingView()
         {
             InitializeComponent();
-            FollowingViewModel.PlayAudioEvent += PlayAudio;
+            FollowingViewModel.RadioPressedEvent += Radio_Pressed;
         }
 
         #region Private Methods
@@ -36,11 +35,9 @@ namespace TwitchDesktop.WPF.Views
             FollowingViewModel.UpdateScroll(e.VerticalOffset, maxScroll);
         }
 
-        private void PlayAudio(string streamFile)
+        private void Radio_Pressed()
         {
             ((MainView)Application.Current.MainWindow).MainViewModel.SelectButton(OptionButton.Home);
-            Uri uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + streamFile);
-            PlayerVLCService.Instance.Play(uri);
         }
 
         #endregion

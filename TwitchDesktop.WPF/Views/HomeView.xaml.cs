@@ -32,9 +32,18 @@ namespace TwitchDesktop.WPF.Views
             InitializeComponent();
         }
 
+        #region Private Methods
+
         private void HomeView_Loaded(object sender, RoutedEventArgs e)
         {
-
+            HomeViewModel.Loaded();
         }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            HomeViewModel.Volume = (int)e.NewValue;
+        }
+
+        #endregion
     }
 }

@@ -37,6 +37,19 @@
     </Page.Resources>
     <Grid>
         <Grid
+            Width="920" Height="480"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="16"
+            Visibility="{Binding IsPlaying, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="30"
+                Foreground="White"
+                Text="CHAT PLACEHOLDER"/>
+        </Grid>
+        <Grid
             Width="920" Height="50"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
@@ -47,28 +60,19 @@
                 Margin="8 0 0 0"
                 Orientation="Horizontal">
                 <Button
-                    x:Name="btnPlay"
+                    x:Name="btnPlayPause"
                     Width="32" Height="32"
                     Style="{StaticResource CustomButtonStyle}"
-                    Command="{Binding HomeCommand}">
+                    Command="{Binding PlayPauseCommand}">
                     <Button.Background>
-                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_play_purple.png"/>
-                    </Button.Background>
-                </Button>
-                <Button
-                    x:Name="btnPause"
-                    Width="32" Height="32"
-                    Style="{StaticResource CustomButtonStyle}"
-                    Command="{Binding HomeCommand}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_pause_purple.png"/>
+                        <ImageBrush ImageSource="{Binding PlayPauseImage}"/>
                     </Button.Background>
                 </Button>
                 <Button
                     x:Name="btnStop"
                     Width="32" Height="32"
                     Style="{StaticResource CustomButtonStyle}"
-                    Command="{Binding HomeCommand}">
+                    Command="{Binding StopCommand}">
                     <Button.Background>
                         <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_stop_purple.png"/>
                     </Button.Background>
@@ -79,18 +83,26 @@
                 Margin="0 0 8 0"
                 Orientation="Horizontal"
                 HorizontalAlignment="Right">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Foreground="#2C2541"
+                    FontSize="20"
+                    Text="{Binding VolumeText}"/>
                 <Slider
                     Width="100"
-                    Margin="0 0 16 0"
+                    Margin="8 0 16 0"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center"
+                    Minimum="0" Maximum="200"
+                    ValueChanged="Slider_ValueChanged"
+                    Value="{Binding Volume}"/>
                 <Button
                     x:Name="btnVolume"
                     Width="32" Height="32"
                     Style="{StaticResource CustomButtonStyle}"
-                    Command="{Binding HomeCommand}">
+                    Command="{Binding SpeakerCommand}">
                     <Button.Background>
-                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_volumeon_purple.png"/>
+                        <ImageBrush ImageSource="{Binding SpeakerImage}"/>
                     </Button.Background>
                 </Button>
             </StackPanel>

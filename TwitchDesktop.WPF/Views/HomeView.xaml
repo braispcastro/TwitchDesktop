@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:TwitchDesktop.WPF.Views"
     xmlns:ViewModel="clr-namespace:TwitchDesktop.ViewModel.ViewModels;assembly=TwitchDesktop.ViewModel"
+    xmlns:Converters="clr-namespace:TwitchDesktop.WPF.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="580" d:DesignWidth="960"
     Background="Transparent"
@@ -13,7 +14,86 @@
     <Page.DataContext>
         <ViewModel:HomeViewModel />
     </Page.DataContext>
+    <Page.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <TextBlock>HOME</TextBlock>
+        <Grid
+            Width="920" Height="50"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="16"
+            Background="White">
+            <StackPanel
+                Height="50"
+                Margin="8 0 0 0"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="btnPlay"
+                    Width="32" Height="32"
+                    Style="{StaticResource CustomButtonStyle}"
+                    Command="{Binding HomeCommand}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_play_purple.png"/>
+                    </Button.Background>
+                </Button>
+                <Button
+                    x:Name="btnPause"
+                    Width="32" Height="32"
+                    Style="{StaticResource CustomButtonStyle}"
+                    Command="{Binding HomeCommand}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_pause_purple.png"/>
+                    </Button.Background>
+                </Button>
+                <Button
+                    x:Name="btnStop"
+                    Width="32" Height="32"
+                    Style="{StaticResource CustomButtonStyle}"
+                    Command="{Binding HomeCommand}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_stop_purple.png"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <StackPanel
+                Height="50"
+                Margin="0 0 8 0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+                <Slider
+                    Width="100"
+                    Margin="0 0 16 0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+                <Button
+                    x:Name="btnVolume"
+                    Width="32" Height="32"
+                    Style="{StaticResource CustomButtonStyle}"
+                    Command="{Binding HomeCommand}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/TwitchDesktop.WPF;component/Resources/Icons/ico_volumeon_purple.png"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

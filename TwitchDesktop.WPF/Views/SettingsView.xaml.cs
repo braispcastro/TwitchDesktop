@@ -53,14 +53,12 @@ namespace TwitchDesktop.WPF.Views
 
         private void Login_Pressed()
         {
-            ((MainView)Application.Current.MainWindow).FrameContent.Navigate(new AuthView());
             ((MainView)Application.Current.MainWindow).ChangePage(OptionButton.Auth);
         }
 
         private void SliderRefreshTimer_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SettingsViewModel.SliderValueChanged(e.NewValue);
-            //((MainView)Application.Current.MainWindow).MainViewModel.RefreshTimerValue();
         }
 
         #endregion

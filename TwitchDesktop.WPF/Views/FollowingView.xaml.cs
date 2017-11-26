@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TwitchDesktop.Common.Enumerables;
 using TwitchDesktop.ViewModel.ViewModels;
+using TwitchDesktop.WPF.Services;
 
 namespace TwitchDesktop.WPF.Views
 {
@@ -29,6 +20,7 @@ namespace TwitchDesktop.WPF.Views
         public FollowingView()
         {
             InitializeComponent();
+            FollowingViewModel.PlayAudioEvent += PlayAudio;
         }
 
         #region Private Methods
@@ -42,6 +34,13 @@ namespace TwitchDesktop.WPF.Views
         {
             double maxScroll = e.ExtentHeight - e.ViewportHeight;
             FollowingViewModel.UpdateScroll(e.VerticalOffset, maxScroll);
+        }
+
+        private void PlayAudio(string streamFile)
+        {
+            ((MainView)Application.Current.MainWindow).MainViewModel.SelectButton(OptionButton.Home);
+            Uri uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + streamFile);
+            PlayerVLCService.Instance.Play(uri);
         }
 
         #endregion

@@ -148,7 +148,7 @@
                             <Image
                                 Width="21" Height="21"
                                 Margin="0 0 0 4"
-                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_vlc_orange.png"
+                                Source="/TwitchDesktop.WPF;component/Resources/Icons/ico_radio_orange.png"
                                 Stretch="Uniform"/>
                         </Button>
                         <StackPanel

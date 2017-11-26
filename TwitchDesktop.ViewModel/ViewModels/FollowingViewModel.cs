@@ -9,12 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TwitchDesktop.Common;
+using TwitchDesktop.Core.TwitchInfo;
 using TwitchDesktop.Model.CVO;
 
 namespace TwitchDesktop.ViewModel.ViewModels
 {
     public class FollowingViewModel : BaseViewModel
     {
+        private readonly ITwitch twitchData;
         private ObservableCollection<StreamChannelCVO> _followsList;
         private ICommand _browserCommand;
         private ICommand _playerCommand;
@@ -41,6 +43,13 @@ namespace TwitchDesktop.ViewModel.ViewModels
             }
         }
 
+        public delegate void PlayAudioEventHandler(string streamFile);
+        public PlayAudioEventHandler PlayAudioEvent;
+        private void OnPlayAudioEvent(string streamFile)
+        {
+            PlayAudioEvent?.Invoke(streamFile);
+        }
+
         #region Commands
 
         public ICommand BrowserCommand
@@ -58,6 +67,7 @@ namespace TwitchDesktop.ViewModel.ViewModels
         //Constructor
         public FollowingViewModel()
         {
+            twitchData = TwitchFactory.Instance.GetTwitch();
             ScrollWidth = 0;
         }
 
@@ -114,24 +124,8 @@ namespace TwitchDesktop.ViewModel.ViewModels
         {
             try
             {
-                string livestreamer = AppDomain.CurrentDomain.BaseDirectory + "livestreamer\\livestreamer.exe";
-                string quality = "best";
-                string channelurl = stream.Url;
-                string cliendId = Constants.TwitchClientId;
-                string vlcPath = "D:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
-                string command = String.Format("/C \"\"{0}\" --player \"{1}\" --http-header Client-ID={2} {3} {4}\"", livestreamer, vlcPath, cliendId, channelurl, quality);
-
-                if (File.Exists(livestreamer))
-                {
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = command;
-                    process.StartInfo = startInfo;
-                    process.Start();
-                }
-                
+                var streamFile = twitchData.GetAudioFromChannel(stream.ChannelName.ToLowerInvariant());
+                OnPlayAudioEvent(streamFile);
             }
             catch (Exception ex)
             {

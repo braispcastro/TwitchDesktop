@@ -84,5 +84,29 @@ namespace TwitchDesktop.Model.Rest
 
             return result;
         }
+
+        public TokenSignatureDAO GetTokenAndSignature(string channel)
+        {
+            TokenSignatureDAO result;
+
+            try
+            {
+                var client = new RestClient(Constants.TwitchApiUrl);
+                var request = new RestRequest("//channels/{channel_name}/access_token", Method.GET);
+                request.AddHeader("Accept", "application/vnd.twitchtv.v5+json");
+                request.AddHeader("Client-ID", Constants.TwitchClientId);
+                request.AddUrlSegment("channel_name", channel);
+
+                var response = client.Execute<TokenSignatureDAO>(request);
+                result = response.StatusCode == HttpStatusCode.OK ? response.Data : null;
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                result = null;
+            }
+
+            return result;
+        }
     }
 }

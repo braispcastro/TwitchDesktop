@@ -162,6 +162,15 @@ namespace TwitchDesktop.ViewModel.ViewModels
                 followsTimer.Enabled = false;
         }
 
+        public void SelectButton(OptionButton button)
+        {
+            OptionSelected = button;
+            HomeSelected = (OptionSelected == OptionButton.Home);
+            FollowingSelected = (OptionSelected == OptionButton.Following);
+            SettingsSelected = (OptionSelected == OptionButton.Settings);
+            OnPageChangeEvent(OptionSelected);
+        }
+
         #endregion
 
         #region Private Functions
@@ -189,15 +198,6 @@ namespace TwitchDesktop.ViewModel.ViewModels
         private void OnSettingsCommand()
         {
             SelectButton(OptionButton.Settings);
-        }
-
-        private void SelectButton(OptionButton button)
-        {
-            OptionSelected = button;
-            HomeSelected = (OptionSelected == OptionButton.Home);
-            FollowingSelected = (OptionSelected == OptionButton.Following);
-            SettingsSelected = (OptionSelected == OptionButton.Settings);
-            OnPageChangeEvent(OptionSelected);
         }
 
         private void CheckTimer_Elapsed(object sender, ElapsedEventArgs e)

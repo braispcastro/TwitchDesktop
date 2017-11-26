@@ -9,5 +9,6 @@ namespace TwitchDesktop.Core.TwitchInfo
         void GetUserInfo();
         List<StreamChannelCVO> GetFollowedStreamsLive();
         int GetFollowedStreamsCount();
+        string GetAudioFromChannel(string channel);
     }
 }

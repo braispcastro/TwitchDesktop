@@ -5,6 +5,7 @@ using TwitchDesktop.Common;
 using System.Collections.Generic;
 using TwitchDesktop.Model.Rest;
 using System.Globalization;
+using System.Net;
 
 namespace TwitchDesktop.Core.TwitchInfo.Implementation
 {
@@ -87,6 +88,29 @@ namespace TwitchDesktop.Core.TwitchInfo.Implementation
             }
 
             return result;
+        }
+
+        public string GetAudioFromChannel(string channel)
+        {
+            string streamFile;
+
+            try
+            {
+                var streamInfo = twitchRest.GetTokenAndSignature(channel);
+                var audioUrl = string.Format(Constants.TwitchPlaylistUrl, channel, streamInfo.sig, streamInfo.token);
+                streamFile = string.Format(@"{0}\{1}.m3u8", Constants.StreamFolderName, channel);
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile(audioUrl, streamFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                streamFile = string.Empty;
+            }
+
+            return streamFile;
         }
 
         #endregion

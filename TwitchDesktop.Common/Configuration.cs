@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,11 @@ namespace TwitchDesktop.Common
 {
     public class Configuration
     {
+        public static string AppVersion
+        {
+            get { return string.Format("v{0}.{1}", Assembly.GetEntryAssembly().GetName().Version.Major, Assembly.GetEntryAssembly().GetName().Version.Minor); }
+        }
+
         public static string AccessToken
         {
             get { return Settings.Default.AccessToken; }

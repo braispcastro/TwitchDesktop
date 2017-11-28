@@ -46,6 +46,12 @@
             Width="960" Height="30"
             Background="#4B367C"
             MouseDown="TopBar_MouseDown">
+            <TextBlock
+                Margin="8 0 0 0"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Foreground="White"
+                Text="{Binding AppVersion}"/>
             <StackPanel
                 Orientation="Horizontal"
                 HorizontalAlignment="Right">

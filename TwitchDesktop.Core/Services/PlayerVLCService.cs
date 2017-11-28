@@ -58,9 +58,13 @@ namespace TwitchDesktop.Core.Services
             if (currentDirectory == null)
                 return;
 
-            DirectoryInfo vlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, (IntPtr.Size == 4) ? @"..\..\lib\x86\" : @"..\..\lib\x64\"));
-            _vlcMediaPlayer = new VlcMediaPlayer(vlcLibDirectory);
-            _vlcMediaPlayer.Audio.Volume = 50;
+            var path = Path.Combine(currentDirectory, (IntPtr.Size == 4) ? @"lib\x86\" : @"lib\x64\");
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo vlcLibDirectory = new DirectoryInfo(path);
+                _vlcMediaPlayer = new VlcMediaPlayer(vlcLibDirectory);
+                _vlcMediaPlayer.Audio.Volume = 50;
+            }
         }
 
         #region Public Methods
